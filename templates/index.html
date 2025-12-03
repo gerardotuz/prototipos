@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block titulo %}BUWERBUNG · Portal de inscripciones{% endblock %}
+
+{% block contenido %}
+<section class="bw-card">
+  <h2>Bienvenido a BUWERBUNG</h2>
+  <p>
+    Este portal te acompaña en todo el proceso de inscripciones y reinscripciones:
+    registro de alumnos, acceso de maestros y panel de administración.
+  </p>
+
+  <div style="display:flex; flex-wrap:wrap; gap:16px; margin-top:20px;">
+    <a href="/registro"
+       style="background:linear-gradient(135deg,#fbbf24,#f97316);color:#111827;padding:12px 20px;border-radius:999px;text-decoration:none;font-weight:600;">
+      Nueva inscripción
+    </a>
+    <a href="/login"
+       style="background:#020617;border:1px solid #4b5563;color:#e5e7eb;padding:12px 20px;border-radius:999px;text-decoration:none;font-weight:500;">
+      Acceso alumno
+    </a>
+    <a href="/maestro/login"
+       style="background:#020617;border:1px solid #4b5563;color:#e5e7eb;padding:12px 20px;border-radius:999px;text-decoration:none;font-weight:500;">
+      Maestros
+    </a>
+    <a href="/admin/login"
+       style="background:#020617;border:1px solid #f59e0b;color:#fbbf24;padding:12px 20px;border-radius:999px;text-decoration:none;font-weight:500;">
+      Administración
+    </a>
+  </div>
+</section>
+{% endblock %}

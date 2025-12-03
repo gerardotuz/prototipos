@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Acceso Maestros | BUWERBUNG</title>
+
+  <style>
+    :root {
+      --vino: #050608;
+      --crema: #020617;
+      --dorado: #f5c44b;
+      --gris: #111827;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--crema);
+      color: #333;
+    }
+
+    header {
+      background-color: var(--vino);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .contenedor {
+      max-width: 420px;
+      margin: 60px auto;
+      background-color: white;
+      border: 2px solid var(--dorado);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: var(--vino);
+      margin-bottom: 25px;
+    }
+
+    label {
+      font-weight: bold;
+      color: var(--vino);
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      margin-bottom: 18px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: var(--vino);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #5e0000;
+    }
+
+    .volver {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      text-decoration: none;
+      color: var(--vino);
+      font-weight: bold;
+    }
+
+    .volver:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>BUWERBUNG</h1>
+  <p>Portal Maestro - BUWERBUNG</p>
+</header>
+<nav style="background:#020617;border-bottom:1px solid #374151;padding:10px 5vw;display:flex;flex-wrap:wrap;gap:8px;"><a href="/" style="padding:8px 14px;border-radius:999px;background:#020617;border:1px solid #4b5563;color:#e5e7eb;text-decoration:none;font-size:0.85rem;">Inicio</a><a href="/maestro/login" style="padding:8px 14px;border-radius:999px;background:#020617;border:1px solid #4b5563;color:#e5e7eb;text-decoration:none;font-size:0.85rem;">Acceso maestros</a></nav>
+
+
+<div class="contenedor">
+  <h2>Acceso a Maestros</h2>
+
+  <form method="POST">
+    <label>Usuario:</label>
+    <input type="text" name="usuario" required>
+
+    <label>Contraseña:</label>
+    <input type="password" name="password" required>
+
+    <button type="submit">Iniciar sesión</button>
+  </form>
+
+  <a href="/" class="volver">Volver al inicio</a>
+</div>
+
+</body>
+</html>

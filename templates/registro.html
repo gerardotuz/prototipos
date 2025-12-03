@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registro BUWERBUNG</title>
+  <style>
+    :root {
+      --vino: #050608;
+      --crema: #020617;
+      --dorado: #f5c44b;
+      --gris: #111827;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--crema);
+      color: #333;
+      padding: 10px;
+    }
+
+    .contenedor {
+      max-width: 900px;
+      margin: auto;
+      background-color: white;
+      border: 2px solid var(--dorado);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: var(--vino);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input, select, textarea {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 100%;
+    }
+
+    button {
+      background-color: var(--vino);
+      color: white;
+      padding: 10px;
+      font-size: 1em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #a00000;
+    }
+
+    @media (min-width: 700px) {
+      .fila {
+        display: flex;
+        gap: 20px;
+      }
+      .fila > div {
+        flex: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header style="background:#020617;border-bottom:1px solid #374151;padding:12px 5vw;">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div style="width:40px;height:40px;border-radius:999px;background:radial-gradient(circle at 30% 0%,#ffffff,#facc15 40%,#f97316 100%);display:flex;align-items:center;justify-content:center;font-weight:800;color:#111827;">BW</div>
+      <div>
+        <h1 style="margin:0;font-size:1.1rem;letter-spacing:0.18em;color:#f5c44b;text-transform:uppercase;">BUWERBUNG</h1>
+        <p style="margin:0;font-size:0.8rem;color:#9ca3af;">Registro de nuevo ingreso</p>
+      </div>
+    </div>
+  </header>
+  <nav style="background:linear-gradient(90deg,rgba(15,23,42,0.9),rgba(15,23,42,0.4));border-bottom:1px solid #374151;padding:10px 5vw;display:flex;flex-wrap:wrap;gap:8px;">
+    <a href="/" style="padding:8px 14px;border-radius:999px;background:#020617;border:1px solid #4b5563;color:#e5e7eb;text-decoration:none;font-size:0.85rem;">Inicio</a>
+    <a href="/login" style="padding:8px 14px;border-radius:999px;background:#020617;border:1px solid #4b5563;color:#e5e7eb;text-decoration:none;font-size:0.85rem;">Acceso alumno</a>
+  </nav>
+
+  <div class="contenedor">
+    <h2>Formulario de Registro</h2>
+    <form action="/registrar" method="POST">
+      <div class="fila">
+        <div>
+          <label>Apellido paterno:</label>
+          <input type="text" name="apellido_paterno" required>
+        </div>
+        <div>
+          <label>Apellido materno:</label>
+          <input type="text" name="apellido_materno" required>
+        </div>
+      </div>
+
+      <label>Nombres:</label>
+      <input type="text" name="nombres" required>
+
+      <div class="fila">
+        <div>
+          <label>Periodo:</label>
+          <input type="text" name="periodo" required>
+        </div>
+        <div>
+          <label>Semestre:</label>
+          <input type="text" name="semestre" required>
+        </div>
+        <div>
+          <label>Turno:</label>
+          <input type="text" name="turno" required>
+        </div>
+      </div>
+
+      <label>Carrera:</label>
+      <input type="text" name="carrera" required>
+
+      <label>CURP:</label>
+      <input type="text" name="curp" required>
+
+      <label>Fecha de nacimiento:</label>
+      <input type="date" name="fecha_nacimiento" required>
+
+      <label>Lugar de nacimiento:</label>
+      <input type="text" name="lugar_nacimiento" required>
+
+      <label>Estado civil:</label>
+      <input type="text" name="estado_civil" required>
+
+      <div class="fila">
+        <div>
+          <label>Colonia:</label>
+          <input type="text" name="colonia" required>
+        </div>
+        <div>
+          <label>Domicilio:</label>
+          <input type="text" name="domicilio" required>
+        </div>
+      </div>
+
+      <label>Código Postal (CP):</label>
+      <input type="text" name="cp" required>
+
+      <label>Teléfono del alumno:</label>
+      <input type="tel" name="telefono" required>
+
+      <label>Correo del alumno:</label>
+      <input type="email" name="email" required>
+
+      <label>Tipo de sangre:</label>
+      <input type="text" name="tipo_sangre" required>
+
+      <label>Alergias:</label>
+      <input type="text" name="alergias" required>
+
+      <label>Nombre del padre o tutor:</label>
+      <input type="text" name="nombre_tutor" required>
+
+      <label>Teléfono del tutor:</label>
+      <input type="tel" name="telefono_tutor" required>
+
+      <label>Correo del tutor:</label>
+      <input type="email" name="email_tutor" required>
+
+      <label>Escolaridad anterior (Secundaria):</label>
+      <input type="text" name="escuela_anterior" required>
+
+      <label>¿Tiene alguna discapacidad?</label>
+      <input type="text" name="discapacidad" required>
+
+      <label>Observaciones médicas:</label>
+      <textarea name="observaciones_medicas"></textarea>
+
+      <h3>Contacto extra en caso de emergencia</h3>
+      <label>Nombre:</label>
+      <input type="text" name="contacto_extra_nombre" required>
+
+      <label>Teléfono:</label>
+      <input type="tel" name="contacto_extra_telefono" required>
+
+      <button type="submit">Registrarse</button>
+    </form>
+  </div>
+</body>
+</html>

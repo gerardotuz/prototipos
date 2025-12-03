@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Portal Maestros | BUWERBUNG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --vino: #050608;
+      --crema: #020617;
+      --dorado: #f5c44b;
+      --gris: #111827;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--crema);
+      color: #333;
+    }
+
+    header {
+      background-color: var(--vino);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .contenedor {
+      max-width: 900px;
+      margin: 40px auto;
+      background-color: white;
+      border: 2px solid var(--dorado);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      border-left: 6px solid var(--vino);
+      padding-left: 10px;
+      color: var(--vino);
+      margin-top: 30px;
+    }
+
+    .opciones-acceso {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .tarjeta-opcion {
+      background-color: var(--gris);
+      border: 2px solid var(--dorado);
+      border-radius: 10px;
+      width: 250px;
+      height: 150px;
+      margin: 10px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.2em;
+      color: var(--vino);
+      text-decoration: none;
+    }
+
+    .tarjeta-opcion:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+
+    .salir {
+      display: block;
+      text-align: center;
+      margin-top: 30px;
+      text-decoration: none;
+      color: var(--vino);
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header style="background:#020617;border-bottom:1px solid #374151;padding:12px 5vw;">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div style="width:40px;height:40px;border-radius:999px;background:radial-gradient(circle at 30% 0%,#ffffff,#facc15 40%,#f97316 100%);display:flex;align-items:center;justify-content:center;font-weight:800;color:#111827;">BW</div>
+      <div>
+        <h1 style="margin:0;font-size:1.1rem;letter-spacing:0.18em;color:#f5c44b;text-transform:uppercase;">BUWERBUNG</h1>
+        <p style="margin:0;font-size:0.8rem;color:#9ca3af;">Portal de inscripciones</p>
+      </div>
+    </div>
+  </header>
+  <nav style="background:linear-gradient(90deg,rgba(15,23,42,0.9),rgba(15,23,42,0.4));border-bottom:1px solid #374151;padding:10px 5vw;display:flex;flex-wrap:wrap;gap:8px;">
+    <a href="/" style="padding:8px 14px;border-radius:999px;background:#020617;border:1px solid #4b5563;color:#e5e7eb;text-decoration:none;font-size:0.85rem;">Inicio</a>
+    <a href="/registro" style="padding:8px 14px;border-radius:999px;background:#020617;border:1px solid #4b5563;color:#e5e7eb;text-decoration:none;font-size:0.85rem;">Nueva inscripción</a>
+    <a href="/login" style="padding:8px 14px;border-radius:999px;background:#020617;border:1px solid #4b5563;color:#e5e7eb;text-decoration:none;font-size:0.85rem;">Acceso alumno</a>
+  </nav>
+
+
+<header>
+  <h1>Portal de Maestros</h1>
+  <p>BUWERBUNG – Sistema Bwerbung</p>
+</header>
+
+<div class="contenedor">
+  <h2>Bienvenido, {{ nombre }}</h2>
+
+  <div class="opciones-acceso">
+    <a href="/maestro/subir_excel" class="tarjeta-opcion">
+      Enviar calificaciones por Excel
+    </a>
+  </div>
+
+  <a href="/logout" class="salir">Cerrar sesión</a>
+</div>
+
+</body>
+</html>

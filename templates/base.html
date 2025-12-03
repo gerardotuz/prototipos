@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block titulo %}BUWERBUNG{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <header class="bw-header">
+        <div class="bw-logo-text">
+            <span class="bw-logo">BW</span>
+            <div class="bw-title">
+                <h1>BUWERBUNG</h1>
+                <p>Portal de inscripciones</p>
+            </div>
+        </div>
+    </header>
+
+    <nav class="bw-nav">
+        <a href="/">Inicio</a>
+        <a href="/registro">Nueva inscripción</a>
+        <a href="/login">Acceso alumno</a>
+        <a href="/admin/login">Admin</a>
+        <a href="/maestro/login">Maestros</a>
+    </nav>
+
+    <main class="bw-main">
+        {% block contenido %}{% endblock %}
+    </main>
+
+    <footer class="bw-footer">
+        © 2025 BUWERBUNG · Sistema de inscripciones
+    </footer>
+</body>
+</html>

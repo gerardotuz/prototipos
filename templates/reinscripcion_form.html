@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reinscripción BUWERBUNG</title>
+  <style>
+    :root {
+      --vino: #050608;
+      --crema: #020617;
+      --dorado: #f5c44b;
+      --gris: #111827;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--crema);
+      color: #333;
+      padding: 20px;
+    }
+
+    .contenedor {
+      max-width: 800px;
+      margin: auto;
+      background-color: white;
+      border: 2px solid var(--dorado);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: var(--vino);
+      margin-bottom: 25px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: var(--vino);
+    }
+
+    input {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 100%;
+    }
+
+    button {
+      background-color: var(--vino);
+      color: white;
+      padding: 12px;
+      font-size: 1em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background-color: #a00000;
+    }
+
+    @media (min-width: 700px) {
+      .fila {
+        display: flex;
+        gap: 20px;
+      }
+
+      .fila > div {
+        flex: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header style="background:#020617;border-bottom:1px solid #374151;padding:12px 5vw;">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div style="width:40px;height:40px;border-radius:999px;background:radial-gradient(circle at 30% 0%,#ffffff,#facc15 40%,#f97316 100%);display:flex;align-items:center;justify-content:center;font-weight:800;color:#111827;">BW</div>
+      <div>
+        <h1 style="margin:0;font-size:1.1rem;letter-spacing:0.18em;color:#f5c44b;text-transform:uppercase;">BUWERBUNG</h1>
+        <p style="margin:0;font-size:0.8rem;color:#9ca3af;">Portal de inscripciones</p>
+      </div>
+    </div>
+  </header>
+  <nav style="background:linear-gradient(90deg,rgba(15,23,42,0.9),rgba(15,23,42,0.4));border-bottom:1px solid #374151;padding:10px 5vw;display:flex;flex-wrap:wrap;gap:8px;">
+    <a href="/" style="padding:8px 14px;border-radius:999px;background:#020617;border:1px solid #4b5563;color:#e5e7eb;text-decoration:none;font-size:0.85rem;">Inicio</a>
+    <a href="/registro" style="padding:8px 14px;border-radius:999px;background:#020617;border:1px solid #4b5563;color:#e5e7eb;text-decoration:none;font-size:0.85rem;">Nueva inscripción</a>
+    <a href="/login" style="padding:8px 14px;border-radius:999px;background:#020617;border:1px solid #4b5563;color:#e5e7eb;text-decoration:none;font-size:0.85rem;">Acceso alumno</a>
+  </nav>
+
+  <div class="contenedor">
+    <h2>Reinscripción - {{ alumno.nombres }}</h2>
+    <form action="/reinscripcion" method="POST">
+
+      <div class="fila">
+        <div>
+          <label for="semestre">Semestre:</label>
+          <input type="text" id="semestre" name="semestre" value="{{ alumno.semestre }}" required>
+        </div>
+        <div>
+          <label for="turno">Turno:</label>
+          <input type="text" id="turno" name="turno" value="{{ alumno.turno }}" required>
+        </div>
+      </div>
+
+      <label for="telefono">Teléfono:</label>
+      <input type="tel" id="telefono" name="telefono" value="{{ alumno.telefono }}" required>
+
+      <label for="email">Correo electrónico:</label>
+      <input type="email" id="email" name="email" value="{{ alumno.email }}" required>
+
+      <div class="fila">
+        <div>
+          <label for="domicilio">Domicilio:</label>
+          <input type="text" id="domicilio" name="domicilio" value="{{ alumno.domicilio }}" required>
+        </div>
+        <div>
+          <label for="colonia">Colonia:</label>
+          <input type="text" id="colonia" name="colonia" value="{{ alumno.colonia }}" required>
+        </div>
+      </div>
+
+      <label for="cp">Código Postal (CP):</label>
+      <input type="text" id="cp" name="cp" value="{{ alumno.cp }}" required>
+
+      <label for="alergias">Tipos de alergias:</label>
+      <input type="text" id="alergias" name="alergias" value="{{ alumno.alergias }}">
+
+      <h3 style="color: var(--vino); margin-top: 20px;">Datos del tutor</h3>
+      <label for="nombre_tutor">Nombre del tutor:</label>
+      <input type="text" id="nombre_tutor" name="nombre_tutor" value="{{ alumno.nombre_tutor }}" required>
+
+      <label for="telefono_tutor">Teléfono del tutor:</label>
+      <input type="tel" id="telefono_tutor" name="telefono_tutor" value="{{ alumno.telefono_tutor }}" required>
+
+      <label for="email_tutor">Correo del tutor:</label>
+      <input type="email" id="email_tutor" name="email_tutor" value="{{ alumno.email_tutor }}" required>
+
+      <h3 style="color: var(--vino); margin-top: 20px;">Contacto extra en caso de emergencia</h3>
+      <label for="contacto_extra_nombre">Nombre del contacto:</label>
+      <input type="text" id="contacto_extra_nombre" name="contacto_extra_nombre" value="{{ alumno.contacto_extra_nombre }}" required>
+
+      <label for="contacto_extra_telefono">Teléfono del contacto:</label>
+      <input type="tel" id="contacto_extra_telefono" name="contacto_extra_telefono" value="{{ alumno.contacto_extra_telefono }}" required>
+
+      <button type="submit">Guardar cambios</button>
+    </form>
+  </div>
+</body>
+</html>

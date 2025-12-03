@@ -1,0 +1,68 @@
+/* estilos.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background: #020617; /* fondo oscuro BUWERBUNG */
+    margin: 0;
+    padding: 0;
+    
+}
+
+.formulario {
+    background: white;
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    width: 350px;
+}
+
+.formulario h2 {
+    text-align: center;
+    color: #f5c44b; /* dorado BUWERBUNG */
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    color: #333;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+    width: 100%;
+    padding: 8px 10px;
+    margin-top: 5px;
+    border: 1.5px solid #d1c47a; /* mostaza CBTis */
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+input[type="submit"] {
+    margin-top: 25px;
+    width: 100%;
+    background-color: #f5c44b; /* dorado BUWERBUNG */
+    color: white;
+    font-size: 16px;
+    padding: 10px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #5a0015;
+}
+
+a {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    text-decoration: none;
+    color: #800020;
+    font-weight: bold;
+}

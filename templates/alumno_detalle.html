@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block titulo %}Detalle del alumno · BUWERBUNG{% endblock %}
+
+{% block contenido %}
+<div class="bw-card">
+    <h2>Detalle del alumno</h2>
+    <table style="border-collapse: collapse; width:100%; margin-top:16px;">
+        {% for campo, valor in alumno.items() %}
+            {% if campo != "_id" %}
+            <tr>
+                <th style="text-align:left; padding:8px 12px; background-color:#020617; color:#f5c44b; border-bottom:1px solid #111827; text-transform:capitalize;">
+                    {{ campo.replace('_', ' ') }}
+                </th>
+                <td style="padding:8px 12px; border-bottom:1px solid #111827; color:#e5e7eb;">
+                    {{ valor }}
+                </td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+
+    <div style="margin-top:18px;">
+        <a href="/admin" style="padding:8px 14px;border-radius:999px;background:#020617;border:1px solid #4b5563;color:#e5e7eb;text-decoration:none;font-size:0.85rem;">
+            Volver al panel
+        </a>
+    </div>
+</div>
+{% endblock %}

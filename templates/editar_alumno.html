@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Editar Alumno - BUWERBUNG</title>
+  <style>
+    :root {
+      --vino: #050608;
+      --crema: #020617;
+      --dorado: #f5c44b;
+      --gris: #111827;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--crema);
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: var(--vino);
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .contenedor {
+      max-width: 900px;
+      margin: 30px auto;
+      background-color: white;
+      padding: 30px;
+      border: 2px solid var(--dorado);
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: var(--vino);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .grupo {
+      margin-bottom: 15px;
+    }
+
+    .grupo label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+      color: var(--vino);
+    }
+
+    .grupo input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: var(--vino);
+      color: white;
+      padding: 12px 25px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #a00000;
+    }
+
+    a.volver {
+      display: inline-block;
+      margin-top: 20px;
+      color: var(--vino);
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    a.volver:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>BUWERBUNG</h1>
+  <p>Editar datos del alumno</p>
+</header>
+<nav style="background:#020617;border-bottom:1px solid #374151;padding:10px 5vw;display:flex;flex-wrap:wrap;gap:8px;"><a href="/" style="padding:8px 14px;border-radius:999px;background:#020617;border:1px solid #4b5563;color:#e5e7eb;text-decoration:none;font-size:0.85rem;">Inicio</a><a href="/admin" style="padding:8px 14px;border-radius:999px;background:#020617;border:1px solid #f5c44b;color:#f5c44b;text-decoration:none;font-size:0.85rem;">Panel admin</a></nav>
+
+
+<div class="contenedor">
+  <h2>{{ alumno.nombres }} - CURP: {{ alumno.curp }}</h2>
+  <form action="/admin/alumno/{{ alumno.curp }}/editar" method="POST">
+
+    {% for campo in [
+      'apellido_paterno', 'apellido_materno', 'nombres', 'periodo', 'semestre', 'turno', 'carrera',
+      'curp', 'fecha_nacimiento', 'lugar_nacimiento', 'estado_civil', 'colonia', 'domicilio', 'cp',
+      'telefono', 'email', 'tipo_sangre', 'alergias', 'nombre_tutor', 'telefono_tutor', 'email_tutor',
+      'escuela_anterior', 'discapacidad', 'observaciones_medicas', 'contacto_extra_nombre', 'contacto_extra_telefono'
+    ] %}
+      <div class="grupo">
+        <label for="{{ campo }}">{{ campo.replace('_', ' ').capitalize() }}</label>
+        <input type="{{ 'email' if 'email' in campo else 'tel' if 'telefono' in campo else 'date' if campo == 'fecha_nacimiento' else 'text' }}"
+               name="{{ campo }}"
+               value="{{ alumno[campo] }}"
+               required>
+      </div>
+    {% endfor %}
+
+    <button type="submit">Guardar cambios</button>
+    <a class="volver" href="/admin">Volver al panel</a>
+  </form>
+</div>
+
+</body>
+</html>

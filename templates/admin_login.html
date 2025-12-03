@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block titulo %}Admin · BUWERBUNG{% endblock %}
+
+{% block contenido %}
+<div class="bw-card">
+    <h2>Acceso administrador</h2>
+    <p>Ingresa tus credenciales de administrador para entrar al panel de control.</p>
+    <form action="/admin/login" method="POST">
+        <label for="usuario">Usuario</label>
+        <input id="usuario" type="text" name="usuario" placeholder="Usuario" required>
+
+        <label for="password">Contraseña</label>
+        <input id="password" type="password" name="password" placeholder="Contraseña" required>
+
+        <input type="submit" value="Entrar al panel">
+    </form>
+</div>
+{% endblock %}

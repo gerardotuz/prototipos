@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block titulo %}Acceso alumno - BUWERBUNG{% endblock %}
+
+{% block contenido %}
+<div class="bw-card">
+    <h2>Acceso alumno</h2>
+    <p>Ingresa tu <strong>CURP</strong> y el correo que registraste para continuar con tu proceso de inscripción.</p>
+    <form action="/iniciar_sesion" method="POST">
+        <label for="curp">CURP</label>
+        <input id="curp" type="text" name="curp" placeholder="CURP" required>
+
+        <label for="email">Correo electrónico</label>
+        <input id="email" type="email" name="email" placeholder="tucorreo@example.com" required>
+
+        <input type="submit" value="Iniciar sesión">
+    </form>
+</div>
+{% endblock %}

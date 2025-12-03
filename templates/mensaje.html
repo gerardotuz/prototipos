@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ titulo }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #020617;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+        .mensaje-box {
+            background-color: #ffffff;
+            border: 1px solid #f5c44b;
+            padding: 30px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        h2 {
+            color: #111827;
+        }
+        p {
+            font-size: 1.1em;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg,#fbbf24,#f97316);
+            color: #111827;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: #ffe066;
+        }
+    </style>
+</head>
+<body>
+  <header style="background:#020617;border-bottom:1px solid #374151;padding:12px 5vw;">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div style="width:40px;height:40px;border-radius:999px;background:radial-gradient(circle at 30% 0%,#ffffff,#facc15 40%,#f97316 100%);display:flex;align-items:center;justify-content:center;font-weight:800;color:#111827;">BW</div>
+      <div>
+        <h1 style="margin:0;font-size:1.1rem;letter-spacing:0.18em;color:#f5c44b;text-transform:uppercase;">BUWERBUNG</h1>
+        <p style="margin:0;font-size:0.8rem;color:#9ca3af;">Portal de inscripciones</p>
+      </div>
+    </div>
+  </header>
+  <nav style="background:linear-gradient(90deg,rgba(15,23,42,0.9),rgba(15,23,42,0.4));border-bottom:1px solid #374151;padding:10px 5vw;display:flex;flex-wrap:wrap;gap:8px;">
+    <a href="/" style="padding:8px 14px;border-radius:999px;background:#020617;border:1px solid #4b5563;color:#e5e7eb;text-decoration:none;font-size:0.85rem;">Inicio</a>
+    <a href="/registro" style="padding:8px 14px;border-radius:999px;background:#020617;border:1px solid #4b5563;color:#e5e7eb;text-decoration:none;font-size:0.85rem;">Nueva inscripción</a>
+    <a href="/login" style="padding:8px 14px;border-radius:999px;background:#020617;border:1px solid #4b5563;color:#e5e7eb;text-decoration:none;font-size:0.85rem;">Acceso alumno</a>
+  </nav>
+
+    <div class="mensaje-box">
+        <h2>{{ titulo }}</h2>
+        <p>{{ mensaje }}</p>
+        <a href="{{ link }}">{{ texto_link }}</a>
+    </div>
+</body>
+</html>
