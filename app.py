@@ -133,6 +133,26 @@ def admin():
 
     return render_template("admin.html", usuarios=list(usuarios.find()))
 
+@app.route("/admin/alumno/<curp>")
+def admin_ver_alumno(curp):
+    # Solo admins
+    if not session.get("admin"):
+        return redirect("/admin/login")
+
+    alumno = usuarios.find_one({"curp": curp})
+
+    if not alumno:
+        return render_template(
+            "mensaje.html",
+            titulo="No encontrado",
+            mensaje="No se encontró un alumno con esa CURP.",
+            link="/admin",
+            texto_link="Volver al panel"
+        )
+
+    return render_template("admin_ver_alumno.html", alumno=alumno)
+
+
 # ---------- MAESTROS ----------
 @app.route("/maestro/login", methods=["GET", "POST"])
 def login_maestro():
