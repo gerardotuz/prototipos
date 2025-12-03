@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Datos del alumno - BUWERBUNG</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+    <style>
+        body { margin:0; font-family: Arial, sans-serif; background:#f8f8f8; }
+        .contenedor {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(15,23,42,0.1);
+            padding: 24px 32px;
+        }
+        h1 { margin-top: 0; color:#800020; }
+        table { width:100%; border-collapse:collapse; margin-top:15px; }
+        th, td { border:1px solid #e5e7eb; padding:8px 10px; text-align:left; }
+        th { background:#f3f4f6; width:30%; }
+        a.boton {
+            display:inline-block;
+            margin-top:20px;
+            padding:8px 16px;
+            border-radius:999px;
+            background:#800020;
+            color:#fff;
+            text-decoration:none;
+            font-weight:bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <h1>Datos del alumno</h1>
+
+        <table>
+            <tr><th>Nombre completo</th><td>{{ alumno.nombres }} {{ alumno.apellido_paterno }} {{ alumno.apellido_materno }}</td></tr>
+            <tr><th>CURP</th><td>{{ alumno.curp }}</td></tr>
+            <tr><th>Correo</th><td>{{ alumno.email }}</td></tr>
+            <tr><th>Teléfono</th><td>{{ alumno.telefono }}</td></tr>
+            <!-- agrega todos los campos que necesites -->
+        </table>
+
+        <a class="boton" href="/admin">← Volver al panel</a>
+    </div>
+</body>
+</html>
