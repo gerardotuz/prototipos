@@ -20,6 +20,8 @@ db = client["cbtis272"]
 usuarios = db["usuarios"]
 admins = db["admins"]
 maestros = db["maestros"]
+reportes_parciales = db["reportes_parciales"]  # NUEVO: reportes que capturan los maestros
+
 
 # ---------- SUBIDA DE ARCHIVOS ----------
 UPLOAD_FOLDER = "uploads"
