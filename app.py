@@ -247,63 +247,91 @@ def panel_maestro():
     return render_template("maestro_menu.html", nombre=session.get("maestro_nombre"))
 
 
+# ---------- CAPTURA DE REPORTE PARCIAL (MAESTRO) ----------
 @app.route("/maestro/subir_excel")
 @solo_maestros
-def subir_excel():
-    return render_template("subir_excel_maestro.html")
+def capturar_reporte_parcial():
+    """
+    Muestra el formulario para capturar los datos que antes iban en el Excel:
+    - Nombre del docente (se toma de sesión)
+    - Parcial, mes, año
+    - Datos por grupo: total, aprobados, reprobados, etc.
+    """
+    return render_template("subir_excel_maestro.html", maestro=session.get("maestro_nombre"))
 
 
 @app.route("/maestro/enviar_excel", methods=["POST"])
 @solo_maestros
-def enviar_excel():
-    archivo = request.files.get("excel")
-    correo = request.form.get("correo")
+def guardar_reporte_parcial():
+    """
+    Guarda en MongoDB el reporte capturado por el maestro.
+    Calcula % de aprobados y reprobados a partir de los números.
+    """
+    # Datos generales del encabezado
+    nombre_docente = session.get("maestro_nombre", "Docente")
+    parcial = request.form.get("parcial", "").strip()
+    mes = request.form.get("mes", "").strip()
+    anio = request.form.get("anio", "").strip()
 
-    if not archivo or archivo.filename == "" or not archivo_permitido(archivo.filename):
-        return render_template(
-            "mensaje.html",
-            titulo="Error",
-            mensaje="Archivo inválido",
-            link="/maestro",
-            texto_link="Volver"
-        )
+    # Fila del grupo (como en el Excel)
+    grupo = request.form.get("grupo", "").strip()
+    asignatura = request.form.get("asignatura", "").strip()
 
-    nombre_seguro = secure_filename(archivo.filename)
-    ruta = os.path.join(UPLOAD_FOLDER, nombre_seguro)
-    archivo.save(ruta)
+    # Función auxiliar para convertir a int sin tronar
+    def to_int(valor):
+        try:
+            return int(valor)
+        except (TypeError, ValueError):
+            return 0
 
-    try:
-        msg = Message("Archivo Excel - BWERBUNG", recipients=[correo])
-        msg.body = f"Archivo enviado por el maestro {session.get('maestro_nombre')}."
+    total_alumnos = to_int(request.form.get("total_alumnos"))
+    alumnos_aprobados = to_int(request.form.get("alumnos_aprobados"))
+    alumnos_reprobados = to_int(request.form.get("alumnos_reprobados"))
+    promedio_general = request.form.get("promedio_general", "").strip()
+    alumnos_dual = to_int(request.form.get("alumnos_dual"))
+    alumnos_sin_contactar = to_int(request.form.get("alumnos_sin_contactar"))
+    acciones_sin_contactar = request.form.get("acciones_sin_contactar", "").strip()
+    total_en_lista = to_int(request.form.get("total_en_lista"))
 
-        with open(ruta, "rb") as f:
-            msg.attach(
-                nombre_seguro,
-                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                f.read()
-            )
+    # Cálculo de porcentajes
+    if total_alumnos > 0:
+        porcentaje_aprobados = round(alumnos_aprobados * 100 / total_alumnos)
+        porcentaje_reprobados = round(alumnos_reprobados * 100 / total_alumnos)
+    else:
+        porcentaje_aprobados = 0
+        porcentaje_reprobados = 0
 
-        mail.send(msg)
+    reporte = {
+        "nombre_docente": nombre_docente,
+        "parcial": parcial,
+        "mes": mes,
+        "anio": anio,
+        "grupo": grupo,
+        "asignatura": asignatura,
+        "total_alumnos": total_alumnos,
+        "alumnos_aprobados": alumnos_aprobados,
+        "porcentaje_aprobados": porcentaje_aprobados,
+        "alumnos_reprobados": alumnos_reprobados,
+        "porcentaje_reprobados": porcentaje_reprobados,
+        "promedio_general": promedio_general,
+        "alumnos_dual": alumnos_dual,
+        "alumnos_sin_contactar": alumnos_sin_contactar,
+        "acciones_sin_contactar": acciones_sin_contactar,
+        "total_en_lista": total_en_lista,
+        "fecha_captura": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "usuario_maestro": session.get("maestro_nombre")
+    }
 
-    except Exception as e:
-        return render_template(
-            "mensaje.html",
-            titulo="Error",
-            mensaje=f"No se pudo enviar el correo: {e}",
-            link="/maestro",
-            texto_link="Volver"
-        )
-
-    if os.path.exists(ruta):
-        os.remove(ruta)
+    reportes_parciales.insert_one(reporte)
 
     return render_template(
         "mensaje.html",
-        titulo="Éxito",
-        mensaje="Archivo enviado correctamente",
+        titulo="Reporte guardado",
+        mensaje="El reporte del grupo fue registrado correctamente.",
         link="/maestro",
-        texto_link="Volver"
+        texto_link="Volver al menú del maestro"
     )
+
 
 # ---------- EJECUCIÓN ----------
 if __name__ == "__main__":
