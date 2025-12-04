@@ -1,125 +1,180 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Enviar Excel | Maestros BUWERBUNG</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    :root {
-      --vino: #050608;
-      --crema: #020617;
-      --dorado: #f5c44b;
-      --gris: #111827;
-    }
-
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: var(--crema);
-      color: #333;
-    }
-
-    header {
-      background-color: var(--vino);
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-
-    .contenedor {
-      max-width: 600px;
-      margin: 40px auto;
-      background-color: white;
-      border: 2px solid var(--dorado);
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    }
-
-    h2 {
-      border-left: 6px solid var(--vino);
-      padding-left: 10px;
-      color: var(--vino);
-      margin-bottom: 20px;
-    }
-
-    label {
-      font-weight: bold;
-    }
-
-    input, button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 8px;
-      margin-bottom: 20px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
-
-    button {
-      background-color: var(--vino);
-      color: white;
-      font-weight: bold;
-      border: none;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #5f0000;
-    }
-
-    .volver {
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    .volver a {
-      color: var(--vino);
-      text-decoration: none;
-      font-weight: bold;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Captura de reporte parcial - BUWERBUNG</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f3f4f6;
+        }
+        .contenedor {
+            max-width: 1100px;
+            margin: 30px auto;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(15,23,42,0.18);
+            padding: 24px 32px;
+        }
+        h1 {
+            margin-top: 0;
+            color: #800020;
+            font-size: 1.4rem;
+        }
+        .subtitulo {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+        .fila {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+        .campo {
+            flex: 1 1 180px;
+            min-width: 180px;
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            font-size: 0.85rem;
+            color: #374151;
+            margin-bottom: 4px;
+        }
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+            padding: 8px 10px;
+            border-radius: 6px;
+            border: 1px solid #d1d5db;
+            font-size: 0.9rem;
+        }
+        textarea {
+            min-height: 70px;
+            resize: vertical;
+        }
+        .nota {
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-top: -4px;
+            margin-bottom: 10px;
+        }
+        .botones {
+            margin-top: 18px;
+        }
+        button {
+            padding: 8px 18px;
+            border-radius: 999px;
+            border: none;
+            background: #800020;
+            color: #ffffff;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #5a0015;
+        }
+        a.volver {
+            margin-left: 10px;
+            font-size: 0.85rem;
+            text-decoration: none;
+            color: #4b5563;
+        }
+    </style>
 </head>
 <body>
-  <header style="background:#020617;border-bottom:1px solid #374151;padding:12px 5vw;">
-    <div style="display:flex;align-items:center;gap:12px;">
-      <div style="width:40px;height:40px;border-radius:999px;background:radial-gradient(circle at 30% 0%,#ffffff,#facc15 40%,#f97316 100%);display:flex;align-items:center;justify-content:center;font-weight:800;color:#111827;">BW</div>
-      <div>
-        <h1 style="margin:0;font-size:1.1rem;letter-spacing:0.18em;color:#f5c44b;text-transform:uppercase;">BUWERBUNG</h1>
-        <p style="margin:0;font-size:0.8rem;color:#9ca3af;">Portal de inscripciones</p>
-      </div>
-    </div>
-  </header>
-  <nav style="background:linear-gradient(90deg,rgba(15,23,42,0.9),rgba(15,23,42,0.4));border-bottom:1px solid #374151;padding:10px 5vw;display:flex;flex-wrap:wrap;gap:8px;">
-    <a href="/" style="padding:8px 14px;border-radius:999px;background:#020617;border:1px solid #4b5563;color:#e5e7eb;text-decoration:none;font-size:0.85rem;">Inicio</a>
-    <a href="/registro" style="padding:8px 14px;border-radius:999px;background:#020617;border:1px solid #4b5563;color:#e5e7eb;text-decoration:none;font-size:0.85rem;">Nueva inscripción</a>
-    <a href="/login" style="padding:8px 14px;border-radius:999px;background:#020617;border:1px solid #4b5563;color:#e5e7eb;text-decoration:none;font-size:0.85rem;">Acceso alumno</a>
-  </nav>
-
-
-<header>
-  <h1>Enviar archivo de calificaciones</h1>
-  <p>BUWERBUNG – Portal de Maestros</p>
-</header>
-
 <div class="contenedor">
-  <h2>Subir archivo Excel</h2>
+    <h1>Captura de reporte parcial</h1>
+    <p class="subtitulo">
+        Docente: <strong>{{ maestro }}</strong> &nbsp; | &nbsp;
+        Aquí registrarás la información que antes llenabas en el formato de Excel.
+        Si tienes varios grupos, envía un formulario por cada grupo.
+    </p>
 
-  <form action="/maestro/enviar_excel" method="POST" enctype="multipart/form-data">
+    <form action="/maestro/enviar_excel" method="POST">
+        <!-- ENCABEZADO GENERAL -->
+        <h3>Datos generales</h3>
+        <div class="fila">
+            <div class="campo">
+                <label for="parcial">Parcial</label>
+                <input type="text" id="parcial" name="parcial" placeholder="Ej. 2do Parcial" required>
+            </div>
+            <div class="campo">
+                <label for="mes">Mes</label>
+                <input type="text" id="mes" name="mes" placeholder="Ej. Octubre" required>
+            </div>
+            <div class="campo">
+                <label for="anio">Año</label>
+                <input type="number" id="anio" name="anio" value="2025" required>
+            </div>
+        </div>
 
-    <label>Correo destino:</label>
-    <input type="email" name="correo" value="calificacionescbtis272@gmail.com" required>
+        <!-- DATOS DEL GRUPO (equivalente a la fila del Excel) -->
+        <h3>Datos por grupo</h3>
+        <div class="fila">
+            <div class="campo">
+                <label for="grupo">Nomenclatura de grupo</label>
+                <input type="text" id="grupo" name="grupo" placeholder="Ej. 3BPV" required>
+            </div>
+            <div class="campo">
+                <label for="asignatura">Asignatura</label>
+                <input type="text" id="asignatura" name="asignatura" placeholder="Ej. Emplea / Implementa / Construye" required>
+            </div>
+            <div class="campo">
+                <label for="total_alumnos">Num. total de alumnos que asisten y ausentes</label>
+                <input type="number" id="total_alumnos" name="total_alumnos" min="0" required>
+            </div>
+        </div>
 
-    <label>Archivo Excel (.xls, .xlsx):</label>
-    <input type="file" name="excel" accept=".xls,.xlsx" required>
+        <div class="fila">
+            <div class="campo">
+                <label for="alumnos_aprobados"># Alumnos aprobados</label>
+                <input type="number" id="alumnos_aprobados" name="alumnos_aprobados" min="0" required>
+                <p class="nota">El sistema calculará el % de aprobados.</p>
+            </div>
+            <div class="campo">
+                <label for="alumnos_reprobados"># Alumnos reprobados</label>
+                <input type="number" id="alumnos_reprobados" name="alumnos_reprobados" min="0" required>
+                <p class="nota">El sistema calculará el % de reprobados.</p>
+            </div>
+            <div class="campo">
+                <label for="promedio_general">Promedio general del grupo</label>
+                <input type="text" id="promedio_general" name="promedio_general" placeholder="Ej. 60.8, 73%, Promedio" required>
+            </div>
+        </div>
 
-    <button type="submit">Enviar archivo</button>
-  </form>
+        <div class="fila">
+            <div class="campo">
+                <label for="alumnos_dual">Alumnos DUAL</label>
+                <input type="number" id="alumnos_dual" name="alumnos_dual" min="0" value="0" required>
+            </div>
+            <div class="campo">
+                <label for="alumnos_sin_contactar"># Alumnos sin contactar (Ausentismo)</label>
+                <input type="number" id="alumnos_sin_contactar" name="alumnos_sin_contactar" min="0" value="0" required>
+            </div>
+            <div class="campo">
+                <label for="total_en_lista">Total de alumnos en LISTA (SISEEMS)</label>
+                <input type="number" id="total_en_lista" name="total_en_lista" min="0" required>
+            </div>
+        </div>
 
-  <div class="volver">
-    <a href="/maestro">Volver al menú</a>
-  </div>
+        <div class="fila">
+            <div class="campo" style="flex:1 1 100%;">
+                <label for="acciones_sin_contactar">Acciones realizadas con alumnos sin contactar</label>
+                <textarea id="acciones_sin_contactar" name="acciones_sin_contactar"
+                          placeholder="Describe brevemente las acciones realizadas: llamadas, mensajes, canalización, etc."></textarea>
+            </div>
+        </div>
+
+        <div class="botones">
+            <button type="submit">Guardar reporte</button>
+            <a href="/maestro" class="volver">← Volver al menú del maestro</a>
+        </div>
+    </form>
 </div>
-
 </body>
 </html>
