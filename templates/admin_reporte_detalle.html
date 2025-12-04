@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle de reporte parcial - BUWERBUNG</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background:#f3f4f6;
+        }
+        .contenedor {
+            max-width: 900px;
+            margin: 40px auto;
+            background:#ffffff;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(15,23,42,0.18);
+            padding: 24px 32px;
+        }
+        h1 {
+            margin-top: 0;
+            color:#800020;
+        }
+        h3 {
+            margin-bottom: 6px;
+            color:#111827;
+        }
+        table {
+            width:100%;
+            border-collapse:collapse;
+            margin-top:10px;
+        }
+        th, td {
+            border:1px solid #e5e7eb;
+            padding:8px 10px;
+            text-align:left;
+            font-size:0.9rem;
+        }
+        th {
+            background:#f3f4f6;
+            width:30%;
+        }
+        .botones {
+            margin-top:18px;
+        }
+        .botones a {
+            display:inline-block;
+            padding:8px 16px;
+            border-radius:999px;
+            background:#800020;
+            color:#ffffff;
+            text-decoration:none;
+            font-weight:bold;
+            font-size:0.85rem;
+        }
+        .botones a.secundario {
+            background:transparent;
+            color:#4b5563;
+            border:1px solid #d1d5db;
+            margin-left:8px;
+        }
+    </style>
+</head>
+<body>
+<div class="contenedor">
+    <h1>Detalle del reporte parcial</h1>
+
+    <h3>Datos generales</h3>
+    <table>
+        <tr><th>Docente</th><td>{{ reporte.nombre_docente }}</td></tr>
+        <tr><th>Parcial</th><td>{{ reporte.parcial }}</td></tr>
+        <tr><th>Mes</th><td>{{ reporte.mes }}</td></tr>
+        <tr><th>Año</th><td>{{ reporte.anio }}</td></tr>
+        <tr><th>Fecha de captura</th><td>{{ reporte.fecha_captura }}</td></tr>
+    </table>
+
+    <h3 style="margin-top:18px;">Datos del grupo</h3>
+    <table>
+        <tr><th>Grupo</th><td>{{ reporte.grupo }}</td></tr>
+        <tr><th>Asignatura</th><td>{{ reporte.asignatura }}</td></tr>
+        <tr><th>Total de alumnos (asisten y ausentes)</th><td>{{ reporte.total_alumnos }}</td></tr>
+        <tr><th># Alumnos aprobados</th><td>{{ reporte.alumnos_aprobados }} ({{ reporte.porcentaje_aprobados }}%)</td></tr>
+        <tr><th># Alumnos reprobados</th><td>{{ reporte.alumnos_reprobados }} ({{ reporte.porcentaje_reprobados }}%)</td></tr>
+        <tr><th>Promedio general del grupo</th><td>{{ reporte.promedio_general }}</td></tr>
+        <tr><th>Alumnos DUAL</th><td>{{ reporte.alumnos_dual }}</td></tr>
+        <tr><th># Alumnos sin contactar</th><td>{{ reporte.alumnos_sin_contactar }}</td></tr>
+        <tr><th>Total alumnos en LISTA (SISEEMS)</th><td>{{ reporte.total_en_lista }}</td></tr>
+    </table>
+
+    <h3 style="margin-top:18px;">Acciones con alumnos sin contactar</h3>
+    <p>{{ reporte.acciones_sin_contactar or "Sin información registrada." }}</p>
+
+    <div class="botones">
+        <a href="/admin/reportes">← Volver a la lista de reportes</a>
+        <a href="/admin" class="secundario">Ir al panel de alumnos</a>
+    </div>
+</div>
+</body>
+</html>
