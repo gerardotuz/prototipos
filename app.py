@@ -5,6 +5,7 @@ from datetime import datetime
 from functools import wraps
 from werkzeug.utils import secure_filename
 from flask_mail import Mail, Message
+from bson.objectid import ObjectId
 
 app = Flask(__name__)
 app.secret_key = "clave_segura_bwerbung_2025"
@@ -212,6 +213,47 @@ def admin_ver_alumno(curp):
         )
 
     return render_template("admin_ver_alumno.html", alumno=alumno)
+
+
+# ---------- REPORTES PARCIALES (ADMIN) ----------
+@app.route("/admin/reportes")
+def admin_reportes():
+    """Lista todos los reportes parciales capturados por los maestros."""
+    if not session.get("admin"):
+        return redirect("/admin/login")
+
+    # Ordenados por año, parcial y grupo
+    reportes = list(
+        reportes_parciales.find().sort(
+            [("anio", 1), ("parcial", 1), ("grupo", 1)]
+        )
+    )
+
+    return render_template("admin_reportes.html", reportes=reportes)
+
+
+@app.route("/admin/reportes/<reporte_id>")
+def admin_reporte_detalle(reporte_id):
+    """Muestra el detalle de un reporte parcial específico."""
+    if not session.get("admin"):
+        return redirect("/admin/login")
+
+    try:
+        reporte = reportes_parciales.find_one({"_id": ObjectId(reporte_id)})
+    except Exception:
+        reporte = None
+
+    if not reporte:
+        return render_template(
+            "mensaje.html",
+            titulo="Reporte no encontrado",
+            mensaje="No se encontró el reporte solicitado.",
+            link="/admin/reportes",
+            texto_link="Volver a reportes"
+        )
+
+    return render_template("admin_reporte_detalle.html", reporte=reporte)
+
 
 # ---------- MAESTROS ----------
 @app.route("/maestro/login", methods=["GET", "POST"])
