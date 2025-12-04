@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reportes parciales - BUWERBUNG</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f3f4f6;
+        }
+        header {
+            background:#020617;
+            border-bottom:1px solid #374151;
+            padding:12px 5vw;
+        }
+        header .cabecera {
+            display:flex;
+            align-items:center;
+            gap:12px;
+        }
+        header .cabecera h1 {
+            margin:0;
+            font-size:1.1rem;
+            letter-spacing:0.18em;
+            color:#f5c44b;
+            text-transform:uppercase;
+        }
+        header .cabecera p {
+            margin:0;
+            font-size:0.8rem;
+            color:#9ca3af;
+        }
+        nav {
+            background:linear-gradient(90deg,rgba(15,23,42,0.9),rgba(15,23,42,0.4));
+            border-bottom:1px solid #374151;
+            padding:10px 5vw;
+            display:flex;
+            flex-wrap:wrap;
+            gap:8px;
+        }
+        nav a {
+            padding:8px 14px;
+            border-radius:999px;
+            background:#020617;
+            border:1px solid #4b5563;
+            color:#e5e7eb;
+            text-decoration:none;
+            font-size:0.85rem;
+        }
+        .layout-admin {
+            display:flex;
+            min-height: calc(100vh - 120px);
+        }
+        .sidebar {
+            width: 230px;
+            background-color: #800020;
+            color: white;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+        .sidebar h2 {
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-size: 20px;
+            border-bottom: 1px solid #d1c47a;
+            padding-bottom: 10px;
+        }
+        .sidebar a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 10px 0;
+            font-weight: bold;
+        }
+        .sidebar a:hover {
+            background-color: #5a0015;
+            padding-left: 10px;
+            border-radius: 4px;
+        }
+        .contenido {
+            flex-grow: 1;
+            padding: 30px;
+            background-color: #f8f8f8;
+            overflow-y: auto;
+        }
+        h1 {
+            color: #800020;
+            margin-top: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            border: 1px solid #e5e7eb;
+            padding: 8px 10px;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+        th {
+            background-color: #d1c47a;
+            color: #111827;
+        }
+        tr:hover {
+            background-color: #f1f5f9;
+        }
+        a.ver {
+            color: #800020;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .subtitulo {
+            font-size: 0.9rem;
+            color: #4b5563;
+            margin-top: 4px;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="cabecera">
+        <div style="width:40px;height:40px;border-radius:999px;background:radial-gradient(circle at 30% 0%,#ffffff,#facc15 40%,#f97316 100%);display:flex;align-items:center;justify-content:center;font-weight:800;color:#111827;">BW</div>
+        <div>
+            <h1>BUWERBUNG</h1>
+            <p>Portal de inscripciones</p>
+        </div>
+    </div>
+</header>
+<nav>
+    <a href="/">Inicio</a>
+    <a href="/registro">Nueva inscripción</a>
+    <a href="/login">Acceso alumno</a>
+</nav>
+
+<div class="layout-admin">
+    <div class="sidebar">
+        <h2>ADMIN</h2>
+        <a href="/admin">Ver alumnos</a>
+        <a href="/admin/reportes">Ver reportes parciales</a>
+        <a href="/logout">Cerrar sesión</a>
+    </div>
+
+    <div class="contenido">
+        <h1>Reportes parciales</h1>
+        <p class="subtitulo">
+            Listado de reportes capturados por los docentes. Cada renglón corresponde a un grupo.
+        </p>
+
+        {% if reportes %}
+        <table>
+            <tr>
+                <th>Docente</th>
+                <th>Parcial</th>
+                <th>Mes</th>
+                <th>Año</th>
+                <th>Grupo</th>
+                <th>Asignatura</th>
+                <th>% Aprobados</th>
+                <th>% Reprobados</th>
+                <th>Acciones</th>
+            </tr>
+            {% for r in reportes %}
+            <tr>
+                <td>{{ r.nombre_docente }}</td>
+                <td>{{ r.parcial }}</td>
+                <td>{{ r.mes }}</td>
+                <td>{{ r.anio }}</td>
+                <td>{{ r.grupo }}</td>
+                <td>{{ r.asignatura }}</td>
+                <td>{{ r.porcentaje_aprobados }}%</td>
+                <td>{{ r.porcentaje_reprobados }}%</td>
+                <td><a class="ver" href="/admin/reportes/{{ r._id }}">Ver</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>No hay reportes capturados todavía.</p>
+        {% endif %}
+    </div>
+</div>
+</body>
+</html>
