@@ -7,11 +7,16 @@
     {% block extra_head %}{% endblock %}
 </head>
 <body>
-    <header class="bw-header">
-        <div class="bw-logo-text">
+   
+
+    <header style="background:#020617;border-bottom:1px solid #374151;padding:12px 5vw;">
+    <div style="display:flex;align-items:center;gap:12px;">
+      
+     <div class="bw-logo-text">
     <img src="{{ url_for('static', filename='/img/bw_logo.png') }}" alt="BUWERBUNG" class="bw-logo-img"> 
         </div>
-    </header>
+    </div>
+  </header>
 
     <nav class="bw-nav">
         <a href="/">Inicio</a>
