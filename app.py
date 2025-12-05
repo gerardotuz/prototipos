@@ -220,6 +220,73 @@ def admin_ver_alumno(curp):
         )
 
     return render_template("admin_ver_alumnos.html", alumno=alumno)
+# ---------- EDITAR ALUMNO (ADMIN) ----------
+@app.route("/admin/alumno/<curp>/editar", methods=["GET", "POST"])
+def admin_editar_alumno(curp):
+    # Solo admins
+    if not session.get("admin"):
+        return redirect("/admin/login")
+
+    alumno = usuarios.find_one({"curp": curp})
+
+    if not alumno:
+        return render_template(
+            "mensaje.html",
+            titulo="No encontrado",
+            mensaje="No se encontró un alumno con esa CURP.",
+            link="/admin",
+            texto_link="Volver al panel"
+        )
+
+    if request.method == "POST":
+        # Tomamos algunos campos básicos para edición
+        nuevos_datos = {
+            "nombres": request.form.get("nombres", "").strip(),
+            "apellido_paterno": request.form.get("apellido_paterno", "").strip(),
+            "apellido_materno": request.form.get("apellido_materno", "").strip(),
+            "email": request.form.get("email", "").strip(),
+            "telefono": request.form.get("telefono", "").strip(),
+            "grupo": request.form.get("grupo", "").strip()
+        }
+
+        # Quitamos claves vacías para no sobreescribir con "" si no llenan algo
+        nuevos_datos = {k: v for k, v in nuevos_datos.items() if v != ""}
+
+        usuarios.update_one({"curp": curp}, {"$set": nuevos_datos})
+
+        return render_template(
+            "mensaje.html",
+            titulo="Alumno actualizado",
+            mensaje="Los datos del alumno se guardaron correctamente.",
+            link=f"/admin/alumno/{curp}",
+            texto_link="Volver a los datos del alumno"
+        )
+
+    # GET: mostramos formulario con datos actuales
+    return render_template("admin_editar_alumno.html", alumno=alumno)
+
+
+# ---------- ELIMINAR ALUMNO (ADMIN) ----------
+@app.route("/admin/alumno/<curp>/eliminar", methods=["POST"])
+def admin_eliminar_alumno(curp):
+    # Solo admins
+    if not session.get("admin"):
+        return redirect("/admin/login")
+
+    resultado = usuarios.delete_one({"curp": curp})
+
+    if resultado.deleted_count == 0:
+        mensaje = "No se encontró el alumno a eliminar."
+    else:
+        mensaje = "El registro del alumno fue eliminado correctamente."
+
+    return render_template(
+        "mensaje.html",
+        titulo="Eliminar alumno",
+        mensaje=mensaje,
+        link="/admin",
+        texto_link="Volver al panel de administración"
+    )
 
 # ---------- REGISTRO DE NUEVOS USUARIOS (ADMIN) ----------
 @app.route("/admin/usuarios/nuevo", methods=["GET", "POST"])
