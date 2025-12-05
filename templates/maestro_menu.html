@@ -1,119 +1,158 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Portal Maestros | BUWERBUNG</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    :root {
-      --vino: #050608;
-      --crema: #020617;
-      --dorado: #f5c44b;
-      --gris: #111827;
-    }
+    <meta charset="UTF-8">
+    <title>Panel Maestro - BUWERBUNG</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background:#020617;
+            color:#e5e7eb;
+        }
 
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: var(--crema);
-      color: #333;
-    }
+        /* HEADER CON LOGO PEQUEÑO */
+        header {
+            background:#020617;
+            border-bottom:1px solid #374151;
+            padding:10px 5vw;
+        }
+        .header-inner {
+            display:flex;
+            align-items:center;
+            gap:14px;
+        }
+        .header-logo {
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+        .header-logo img {
+            height:48px;      /* 👈 tamaño del logo */
+            width:auto;
+            border-radius:8px;
+        }
+        .header-text h1 {
+            margin:0;
+            font-size:1.05rem;
+            letter-spacing:0.18em;
+            color:#f5c44b;
+            text-transform:uppercase;
+        }
+        .header-text p {
+            margin:0;
+            font-size:0.8rem;
+            color:#9ca3af;
+        }
 
-    header {
-      background-color: var(--vino);
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
+        /* NAV SUPERIOR */
+        nav {
+            background:linear-gradient(90deg,rgba(15,23,42,0.95),rgba(15,23,42,0.7));
+            border-bottom:1px solid #374151;
+            padding:10px 5vw;
+            display:flex;
+            flex-wrap:wrap;
+            gap:8px;
+        }
+        nav a {
+            padding:8px 16px;
+            border-radius:999px;
+            background:#020617;
+            border:1px solid #4b5563;
+            color:#e5e7eb;
+            text-decoration:none;
+            font-size:0.85rem;
+        }
+        nav a:hover {
+            background:#111827;
+        }
 
-    .contenedor {
-      max-width: 900px;
-      margin: 40px auto;
-      background-color: white;
-      border: 2px solid var(--dorado);
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    }
-
-    h2 {
-      border-left: 6px solid var(--vino);
-      padding-left: 10px;
-      color: var(--vino);
-      margin-top: 30px;
-    }
-
-    .opciones-acceso {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      margin-top: 30px;
-    }
-
-    .tarjeta-opcion {
-      background-color: var(--gris);
-      border: 2px solid var(--dorado);
-      border-radius: 10px;
-      width: 250px;
-      height: 150px;
-      margin: 10px;
-      padding: 20px;
-      text-align: center;
-      cursor: pointer;
-      transition: transform 0.3s, box-shadow 0.3s;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 1.2em;
-      color: var(--vino);
-      text-decoration: none;
-    }
-
-    .tarjeta-opcion:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-    }
-
-    .salir {
-      display: block;
-      text-align: center;
-      margin-top: 30px;
-      text-decoration: none;
-      color: var(--vino);
-      font-weight: bold;
-    }
-  </style>
+        /* CONTENIDO PRINCIPAL */
+        .contenido {
+            padding:30px 5vw 40px;
+        }
+        .tarjeta {
+            background:#0b1120;
+            border-radius:16px;
+            padding:20px 24px;
+            box-shadow:0 18px 35px rgba(15,23,42,0.55);
+            border:1px solid #1f2937;
+            max-width:720px;
+            margin:0 auto;
+        }
+        .tarjeta h2 {
+            margin-top:0;
+            color:#f9fafb;
+        }
+        .tarjeta p {
+            font-size:0.9rem;
+            color:#9ca3af;
+        }
+        .acciones {
+            margin-top:18px;
+            display:flex;
+            flex-wrap:wrap;
+            gap:10px;
+        }
+        .acciones a {
+            padding:9px 18px;
+            border-radius:999px;
+            background:#800020;
+            color:#f9fafb;
+            text-decoration:none;
+            font-size:0.85rem;
+            font-weight:bold;
+            border:none;
+        }
+        .acciones a.secundario {
+            background:#111827;
+            border:1px solid #4b5563;
+        }
+        .acciones a:hover {
+            background:#5a0015;
+        }
+        .acciones a.secundario:hover {
+            background:#020617;
+        }
+    </style>
 </head>
 <body>
-  <header style="background:#020617;border-bottom:1px solid #374151;padding:12px 5vw;">
-    <div style="display:flex;align-items:center;gap:12px;">
-      
-     <div class="bw-logo-text">
-    <img src="{{ url_for('static', filename='/img/bw_logo.png') }}" alt="BUWERBUNG" class="bw-logo-img"> 
-        </div>
-    </div>
-  </header>
-  <nav style="background:linear-gradient(90deg,rgba(15,23,42,0.9),rgba(15,23,42,0.4));border-bottom:1px solid #374151;padding:10px 5vw;display:flex;flex-wrap:wrap;gap:8px;">
-    <a href="/" style="padding:8px 14px;border-radius:999px;background:#020617;border:1px solid #4b5563;color:#e5e7eb;text-decoration:none;font-size:0.85rem;">Inicio</a>
-    <a href="/registro" style="padding:8px 14px;border-radius:999px;background:#020617;border:1px solid #4b5563;color:#e5e7eb;text-decoration:none;font-size:0.85rem;">Nueva inscripción</a>
-    <a href="/login" style="padding:8px 14px;border-radius:999px;background:#020617;border:1px solid #4b5563;color:#e5e7eb;text-decoration:none;font-size:0.85rem;">Acceso alumno</a>
-  </nav>
-
 
 <header>
-  <h1>Portal de Maestros</h1>
-  <p>BUWERBUNG – Sistema Buwerbung</p>
+    <div class="header-inner">
+        <div class="header-logo">
+            <!-- 👇 Ajusta la ruta si tu archivo tiene otro nombre -->
+            <img src="{{ url_for('static', filename='img/bw_logo.png') }}" alt="BUWERBUNG">
+        </div>
+        <div class="header-text">
+            <h1>BUWERBUNG</h1>
+            <p>Panel del maestro · {{ nombre }}</p>
+        </div>
+    </div>
 </header>
 
-<div class="contenedor">
-  <h2>Bienvenido, {{ nombre }}</h2>
+<nav>
+    <a href="/">Inicio</a>
+    <a href="/registro">Nueva inscripción</a>
+    <a href="/login">Acceso alumno</a>
+    <a href="/maestro/subir_excel">Capturar reporte parcial</a>
+    <a href="/logout">Cerrar sesión</a>
+</nav>
 
-  <div class="opciones-acceso">
-    <a href="/maestro/subir_excel" class="tarjeta-opcion">Capturar reporte parcial</a>
-  </div>
+<div class="contenido">
+    <div class="tarjeta">
+        <h2>Bienvenido, {{ nombre }}</h2>
+        <p>
+            Desde este panel puedes capturar los reportes parciales de tus grupos
+            y enviarlos a la coordinación. Usa las opciones de abajo para comenzar.
+        </p>
 
-  <a href="/logout" class="salir">Cerrar sesión</a>
+        <div class="acciones">
+            <a href="/maestro/subir_excel">➜ Capturar reporte parcial</a>
+            <a href="/logout" class="secundario">Cerrar sesión</a>
+        </div>
+    </div>
 </div>
 
 </body>
