@@ -45,18 +45,30 @@
             margin-bottom: 4px;
         }
         input[type="text"],
-        input[type="number"],
-        select,
-        textarea {
-            padding: 8px 10px;
-            border-radius: 6px;
-            border: 1px solid #d1d5db;
-            font-size: 0.9rem;
-        }
-        textarea {
-            min-height: 70px;
-            resize: vertical;
-        }
+input[type="number"],
+select,
+textarea {
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #1f2937;
+    font-size: 0.9rem;
+    background: #020617;   /* fondo oscuro */
+    color: #f9fafb;        /* texto claro */
+}
+
+/* color del cursor y placeholder para que se vea bien */
+input[type="text"]::placeholder,
+input[type="number"]::placeholder,
+textarea::placeholder {
+    color: #9ca3af;
+    opacity: 1;
+}
+
+textarea {
+    min-height: 70px;
+    resize: vertical;
+}
+
         .nota {
             font-size: 0.8rem;
             color: #6b7280;
