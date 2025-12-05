@@ -10,9 +10,31 @@
             font-family: Arial, sans-serif;
             background:#f3f4f6;
         }
-        body td {
-    color: #e5e7eb;
+       /* Campos del formulario: rol, nombres, usuario, CURP, etc. */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+select,
+textarea {
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #1f2937;
+    font-size: 0.9rem;
+    background: #020617;   /* fondo oscuro */
+    color: #f9fafb;        /* TEXTO CLARO */
 }
+
+/* Placeholders en gris suave */
+input[type="text"]::placeholder,
+input[type="password"]::placeholder,
+input[type="email"]::placeholder,
+input[type="number"]::placeholder,
+textarea::placeholder {
+    color: #9ca3af;
+    opacity: 1;
+}
+
         header {
             background:#020617;
             border-bottom:1px solid #374151;
