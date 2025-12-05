@@ -4,31 +4,103 @@
     <meta charset="UTF-8">
     <title>Datos del alumno - BUWERBUNG</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
-    <style>
-        body { margin:0; font-family: Arial, sans-serif; background:#f8f8f8; }
-        .contenedor {
-            max-width: 900px;
-            margin: 40px auto;
-            background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(15,23,42,0.1);
-            padding: 24px 32px;
-        }
-        h1 { margin-top: 0; color:#800020; }
-        table { width:100%; border-collapse:collapse; margin-top:15px; }
-        th, td { border:1px solid #e5e7eb; padding:8px 10px; text-align:left; }
-        th { background:#f3f4f6; width:30%; }
-        a.boton {
-            display:inline-block;
-            margin-top:20px;
-            padding:8px 16px;
-            border-radius:999px;
-            background:#800020;
-            color:#fff;
-            text-decoration:none;
-            font-weight:bold;
-        }
-    </style>
+  <style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f3f4f6;
+    }
+
+    .contenedor {
+        max-width: 900px;
+        margin: 40px auto;
+        background:#ffffff;
+        border-radius: 10px;
+        box-shadow: 0 15px 35px rgba(15,23,42,0.18);
+        padding: 24px 32px;
+    }
+
+    h1 {
+        margin-top: 0;
+        color:#800020;
+        font-size:1.6rem;
+        font-weight:800;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top:15px;
+        border-radius:10px;
+        overflow:hidden;
+    }
+
+    th, td {
+        padding:12px 14px;
+        font-size:0.9rem;
+        border-bottom:1px solid #1f2937;
+    }
+
+    th {
+        background:#d1c47a;     /* dorado */
+        color:#111827;
+        font-weight:800;
+        text-transform:uppercase;
+    }
+
+    /* FILAS OSCURAS PERO LEGIBLES */
+    tbody td {
+        background:#020617;     /* negro azulado */
+        color:#f3f4f6;          /* texto claro */
+        font-weight:500;
+    }
+
+    tbody tr:nth-child(even) td {
+        background:#0b1120;
+    }
+
+    tbody tr:hover td {
+        background:#111827;
+    }
+
+    .botones {
+        margin-top: 25px;
+        display:flex;
+        gap:14px;
+        flex-wrap: wrap;
+    }
+
+    button,
+    a.boton {
+        padding:10px 22px;
+        border-radius:999px;
+        font-weight:700;
+        font-size:0.9rem;
+        border:none;
+        cursor:pointer;
+        text-decoration:none;
+        display:inline-block;
+    }
+
+    /* Botón volver */
+    .boton-volver {
+        background:#800020;
+        color:#ffffff;
+    }
+    .boton-volver:hover {
+        background:#5a0015;
+    }
+
+    /* Botón eliminar */
+    .boton-eliminar {
+        background:#b91c1c;
+        color:#ffffff;
+    }
+    .boton-eliminar:hover {
+        background:#991b1b;
+    }
+</style>
+
 </head>
 <body>
     <div class="contenedor">
