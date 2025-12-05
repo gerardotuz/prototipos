@@ -1,71 +1,209 @@
 /* estilos.css */
+/* Estilos específicos de paneles (admin/maestro),
+   usando la paleta definida en style.css (:root ...) */
 
-body {
-    font-family: Arial, sans-serif;
-    background: #020617; /* fondo oscuro BUWERBUNG */
-    margin: 0;
-    padding: 0;
-    
+/* LAYOUT ADMIN/MAESTRO CON SIDEBAR */
+.layout-admin {
+    display: flex;
+    min-height: calc(100vh - 140px); /* header + nav */
 }
 
-.formulario {
-    background: white;
-    padding: 25px 30px;
+/* Sidebar vino (secundario BUWERBUNG) */
+.sidebar {
+    width: 230px;
+    background-color: #800020;
+    color: #ffffff;
+    padding: 20px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.45);
+}
+
+.sidebar h2 {
+    margin-top: 0;
+    margin-bottom: 24px;
+    font-size: 1.05rem;
+    border-bottom: 1px solid rgba(245, 196, 75, 0.6); /* dorado suave */
+    padding-bottom: 8px;
+    letter-spacing: 0.08em;
+}
+
+.sidebar a {
+    display: block;
+    color: #f9fafb;
+    text-decoration: none;
+    padding: 9px 4px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 6px;
+}
+
+.sidebar a:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+    padding-left: 10px;
+}
+
+/* CONTENIDO PRINCIPAL DEL PANEL */
+.contenido {
+    flex: 1;
+    padding: 26px 32px 40px;
+    background: var(--bw-bg-alt);
+    color: var(--bw-text);
+    overflow-y: auto;
+}
+
+.contenido h1 {
+    margin-top: 0;
+    font-size: 1.3rem;
+    color: var(--bw-gold);
+}
+
+/* SUBTÍTULOS / TEXTOS GRIS SUAVE */
+.subtitulo {
+    font-size: 0.9rem;
+    color: var(--bw-muted);
+}
+
+/* TABLAS (ADMIN ALUMNOS, REPORTES, etc.) */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 18px;
+    background: rgba(15, 23, 42, 0.9);
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
-    width: 350px;
+    overflow: hidden;
+    box-shadow: var(--bw-shadow);
 }
 
-.formulario h2 {
-    text-align: center;
-    color: #f5c44b; /* dorado BUWERBUNG */
-    margin-bottom: 20px;
+th, td {
+    padding: 9px 12px;
+    font-size: 0.88rem;
+    text-align: left;
+    border-bottom: 1px solid var(--bw-border);
+}
+
+th {
+    background: var(--bw-gold);
+    color: #111827;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+tr:nth-child(even) td {
+    background: rgba(15, 23, 42, 0.85);
+}
+
+tr:nth-child(odd) td {
+    background: rgba(15, 23, 42, 0.95);
+}
+
+tr:hover td {
+    background: rgba(30, 64, 175, 0.3);
+}
+
+/* Enlaces "Ver" en tablas */
+a.ver {
+    color: var(--bw-gold);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+a.ver:hover {
+    text-decoration: underline;
+}
+
+/* FORMULARIOS TIPO TARJETA (nuevo usuario, captura reporte, etc.) */
+.formulario-panel {
+    max-width: 720px;
+    background: #0b1120;
+    border-radius: 16px;
+    box-shadow: var(--bw-shadow);
+    padding: 22px 26px 26px;
+    border: 1px solid var(--bw-border);
+}
+
+.formulario-panel h2 {
+    margin-top: 0;
+    color: var(--bw-gold);
+    font-size: 1.1rem;
+}
+
+.fila {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+.campo {
+    flex: 1 1 220px;
+    min-width: 220px;
+    display: flex;
+    flex-direction: column;
 }
 
 label {
-    display: block;
-    margin-top: 15px;
-    color: #333;
-    font-weight: bold;
+    font-size: 0.85rem;
+    color: var(--bw-muted);
+    margin-bottom: 4px;
 }
 
 input[type="text"],
+input[type="password"],
 input[type="email"],
-input[type="tel"] {
-    width: 100%;
+input[type="number"],
+select,
+textarea {
     padding: 8px 10px;
-    margin-top: 5px;
-    border: 1.5px solid #d1c47a; /* mostaza CBTis */
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid var(--bw-border);
+    background: #020617;
+    color: var(--bw-text);
+    font-size: 0.9rem;
 }
 
+textarea {
+    resize: vertical;
+    min-height: 70px;
+}
+
+/* BOTONES */
+.boton-primario,
 input[type="submit"] {
-    margin-top: 25px;
-    width: 100%;
-    background-color: #f5c44b; /* dorado BUWERBUNG */
-    color: white;
-    font-size: 16px;
-    padding: 10px;
+    display: inline-block;
+    margin-top: 18px;
+    padding: 8px 18px;
+    border-radius: 999px;
     border: none;
-    border-radius: 7px;
+    background: var(--bw-gold);
+    color: #111827;
+    font-weight: 700;
+    font-size: 0.9rem;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-input[type="submit"]:hover {
-    background-color: #5a0015;
-}
-
-a {
-    display: block;
-    text-align: center;
-    margin-top: 15px;
     text-decoration: none;
-    color: #800020;
-    font-weight: bold;
 }
+
+.boton-primario:hover,
+input[type="submit"]:hover {
+    background: var(--bw-gold-soft);
+}
+
+.boton-secundario {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    border: 1px solid var(--bw-border);
+    background: transparent;
+    color: var(--bw-text);
+    font-size: 0.85rem;
+    text-decoration: none;
+}
+
+.boton-secundario:hover {
+    background: #020617;
+}
+
+/* Logo en otras vistas que usen la clase */
 .bw-logo-img {
     width: 48px;
     height: 48px;
@@ -73,4 +211,3 @@ a {
     border-radius: 50%;
     display: block;
 }
-
