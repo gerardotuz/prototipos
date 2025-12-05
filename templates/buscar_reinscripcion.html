@@ -6,13 +6,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
 </head>
 <body>
-  <header style="background:#020617;border-bottom:1px solid #374151;padding:12px 5vw;">
+ <header style="background:#020617;border-bottom:1px solid #374151;padding:12px 5vw;">
     <div style="display:flex;align-items:center;gap:12px;">
-      <div style="width:40px;height:40px;border-radius:999px;background:radial-gradient(circle at 30% 0%,#ffffff,#facc15 40%,#f97316 100%);display:flex;align-items:center;justify-content:center;font-weight:800;color:#111827;">BW</div>
-      <div>
-        <h1 style="margin:0;font-size:1.1rem;letter-spacing:0.18em;color:#f5c44b;text-transform:uppercase;">BUWERBUNG</h1>
-        <p style="margin:0;font-size:0.8rem;color:#9ca3af;">Portal de inscripciones</p>
-      </div>
+      
+     <div class="bw-logo-text">
+    <img src="{{ url_for('static', filename='/img/bw_logo.png') }}" alt="BUWERBUNG" class="bw-logo-img"> 
+        </div>
     </div>
   </header>
   <nav style="background:linear-gradient(90deg,rgba(15,23,42,0.9),rgba(15,23,42,0.4));border-bottom:1px solid #374151;padding:10px 5vw;display:flex;flex-wrap:wrap;gap:8px;">
