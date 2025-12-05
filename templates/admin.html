@@ -80,33 +80,56 @@
             margin-left: 10px;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
+          table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+        background:#020617;              /* fondo general de la tabla */
+        border-radius:12px;
+        overflow:hidden;
+    }
 
-        th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: left;
-            font-size: 14px;
-        }
+    th, td {
+        border-bottom: 1px solid #1f2937;
+        padding: 10px;
+        text-align: left;
+        font-size: 14px;
+    }
 
-        th {
-            background-color: #d1c47a;
-            color: #333;
-        }
+    /* Encabezados dorados y texto oscuro */
+    th {
+        background-color: #d1c47a;
+        color: #111827;
+    }
 
-        tr:hover {
-            background-color: #f0f0f0;
-        }
+    /* Filas alternadas en tonos oscuros pero con texto CLARO */
+    tbody tr:nth-child(odd) {
+        background:#0b1120;
+    }
+    tbody tr:nth-child(even) {
+        background:#020617;
+    }
 
-        a.ver {
-            color: #800020;
-            font-weight: bold;
-            text-decoration: none;
-        }
+    /* Texto de las celdas en color claro */
+    tbody td {
+        color:#e5e7eb;
+    }
+
+    /* Hover suave, sin perder legibilidad */
+    tbody tr:hover {
+        background:#111827;
+    }
+
+    /* Enlace "Ver" en color acento (vino/dorado) */
+    a.ver {
+        color:#be123c;
+        font-weight: bold;
+        text-decoration: none;
+    }
+    a.ver:hover {
+        text-decoration: underline;
+    }
+
     </style>
 </head>
 <body>
