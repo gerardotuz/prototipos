@@ -3,35 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block titulo %}BUWERBUNG{% endblock %}</title>
+
+    <!-- HOJA DE ESTILOS GLOBAL -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
     {% block extra_head %}{% endblock %}
 </head>
-<body>
-   
+<body style="margin:0;font-family:Arial, sans-serif;background:#020617;color:#e5e7eb;">
 
+    <!-- HEADER -->
     <header style="background:#020617;border-bottom:1px solid #374151;padding:12px 5vw;">
-    <div style="display:flex;align-items:center;gap:12px;">
-      
-     <div class="bw-logo-text">
-    <img src="{{ url_for('static', filename='/img/bw_logo.png') }}" alt="BUWERBUNG" class="bw-logo-img"> 
-        </div>
-    </div>
-  </header>
+        <div style="display:flex;align-items:center;gap:14px;">
 
-    <nav class="bw-nav">
-        <a href="/">Inicio</a>
-        <a href="/registro">Nueva inscripción</a>
-        <a href="/login">Acceso alumno</a>
-        <a href="/admin/login">Admin</a>
-        <a href="/maestro/login">Maestros</a>
+            <!-- LOGO -->
+            <div style="display:flex;align-items:center;justify-content:center;">
+                <!-- 👇 IMPORTANTE: NO usar diagonal inicial -->
+                <img
+                    src="{{ url_for('static', filename='img/bw_logo.png') }}"
+                    alt="BUWERBUNG"
+                    style="height:48px;width:auto;border-radius:8px;"
+                >
+            </div>
+
+            <!-- TEXTO -->
+            <div>
+                <h1 style="margin:0;font-size:1.05rem;letter-spacing:0.18em;color:#f5c44b;text-transform:uppercase;">
+                    BUWERBUNG
+                </h1>
+                <p style="margin:0;font-size:0.8rem;color:#9ca3af;">
+                    Portal de inscripciones
+                </p>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- NAV -->
+    <nav style="
+        background:linear-gradient(90deg,rgba(15,23,42,0.95),rgba(15,23,42,0.7));
+        border-bottom:1px solid #374151;
+        padding:10px 5vw;
+        display:flex;
+        flex-wrap:wrap;
+        gap:8px;
+    ">
+        <a href="/" style="padding:8px 16px;border-radius:999px;background:#020617;border:1px solid #4b5563;color:#e5e7eb;text-decoration:none;font-size:0.85rem;">Inicio</a>
+        <a href="/registro" style="padding:8px 16px;border-radius:999px;background:#020617;border:1px solid #4b5563;color:#e5e7eb;text-decoration:none;font-size:0.85rem;">Nueva inscripción</a>
+        <a href="/login" style="padding:8px 16px;border-radius:999px;background:#020617;border:1px solid #4b5563;color:#e5e7eb;text-decoration:none;font-size:0.85rem;">Acceso alumno</a>
+        <a href="/admin/login" style="padding:8px 16px;border-radius:999px;background:#020617;border:1px solid #4b5563;color:#e5e7eb;text-decoration:none;font-size:0.85rem;">Admin</a>
+        <a href="/maestro/login" style="padding:8px 16px;border-radius:999px;background:#020617;border:1px solid #4b5563;color:#e5e7eb;text-decoration:none;font-size:0.85rem;">Maestros</a>
     </nav>
 
-    <main class="bw-main">
-        {% block contenido %}{% endblock %}
+    <!-- CONTENIDO -->
+    <main class="bw-main" style="padding:30px 5vw 40px;">
+        {% block contenido %}
+        {% endblock %}
     </main>
 
-    <footer class="bw-footer">
+    <!-- FOOTER -->
+    <footer class="bw-footer" style="text-align:center;padding:20px 10px;font-size:0.8rem;color:#9ca3af;border-top:1px solid #374151;">
         © 2025 BUWERBUNG · Sistema de inscripciones
     </footer>
+
 </body>
 </html>
