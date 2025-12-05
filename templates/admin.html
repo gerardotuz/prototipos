@@ -1,66 +1,194 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Admin - BUWERBUNG</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+    <style>
+       body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+}
 
-{% block titulo %}Panel Admin · BUWERBUNG{% endblock %}
+/* contenedor que sí será flex: sidebar + contenido */
+.layout-admin {
+    display: flex;
+    min-height: calc(100vh - 120px); /* ajusta si ves mucho espacio */
+}
 
-{% block contenido %}
 
-<div class="bw-admin-layout">
+        .sidebar {
+            width: 230px;
+            background-color: #800020;
+            color: white;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
 
-  <!-- Sidebar -->
-  <aside class="bw-admin-sidebar">
+        .sidebar h2 {
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-size: 20px;
+            border-bottom: 1px solid #d1c47a;
+            padding-bottom: 10px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 10px 0;
+            font-weight: bold;
+        }
+
+        .sidebar a:hover {
+            background-color: #5a0015;
+            padding-left: 10px;
+            border-radius: 4px;
+        }
+
+        .contenido {
+            flex-grow: 1;
+            padding: 30px;
+            background-color: #f8f8f8;
+            overflow-y: auto;
+        }
+
+        h1 {
+            color: #800020;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            width: 250px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="submit"] {
+            padding: 8px 15px;
+            background-color: #800020;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+          table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+        background:#020617;              /* fondo general de la tabla */
+        border-radius:12px;
+        overflow:hidden;
+    }
+
+    th, td {
+        border-bottom: 1px solid #1f2937;
+        padding: 10px;
+        text-align: left;
+        font-size: 14px;
+    }
+
+    /* Encabezados dorados y texto oscuro */
+    th {
+        background-color: #d1c47a;
+        color: #111827;
+    }
+
+    /* Filas alternadas en tonos oscuros pero con texto CLARO */
+    tbody tr:nth-child(odd) {
+        background:#0b1120;
+    }
+    tbody tr:nth-child(even) {
+        background:#020617;
+    }
+
+    /* Texto de las celdas en color claro */
+    tbody td {
+        color:#e5e7eb;
+    }
+
+    /* Hover suave, sin perder legibilidad */
+    tbody tr:hover {
+        background:#111827;
+    }
+
+    /* Enlace "Ver" en color acento (vino/dorado) */
+    a.ver {
+        color:#be123c;
+        font-weight: bold;
+        text-decoration: none;
+    }
+    a.ver:hover {
+        text-decoration: underline;
+    }
+
+    </style>
+</head>
+<body>
+  <header style="background:#020617;border-bottom:1px solid #374151;padding:12px 5vw;">
+    <div style="display:flex;align-items:center;gap:12px;">
+      
+     <div class="bw-logo-text">
+    <img src="{{ url_for('static', filename='/img/bw_logo.png') }}" alt="BUWERBUNG" class="bw-logo-img"> 
+        </div>
+    </div>
+  </header>
+  <nav style="background:linear-gradient(90deg,rgba(15,23,42,0.9),rgba(15,23,42,0.4));border-bottom:1px solid #374151;padding:10px 5vw;display:flex;flex-wrap:wrap;gap:8px;">
+    <a href="/" style="padding:8px 14px;border-radius:999px;background:#020617;border:1px solid #4b5563;color:#e5e7eb;text-decoration:none;font-size:0.85rem;">Inicio</a>
+    <a href="/registro" style="padding:8px 14px;border-radius:999px;background:#020617;border:1px solid #4b5563;color:#e5e7eb;text-decoration:none;font-size:0.85rem;">Nueva inscripción</a>
+    <a href="/login" style="padding:8px 14px;border-radius:999px;background:#020617;border:1px solid #4b5563;color:#e5e7eb;text-decoration:none;font-size:0.85rem;">Acceso alumno</a>
+  </nav>
+
+    <div class="layout-admin">
+    <div class="sidebar">
     <h2>ADMIN</h2>
     <a href="/admin">Ver alumnos</a>
     <a href="/admin/reportes">Ver reportes parciales</a>
-    <a href="/admin/nuevo_usuario">Registrar nuevo usuario</a>
+    <a href="/admin/usuarios/nuevo">Registrar nuevo usuario</a>
     <a href="/logout">Cerrar sesión</a>
-  </aside>
-
-  <!-- Contenido principal -->
-  <section class="bw-admin-content">
-    <h1>Panel de Administración</h1>
-    <p class="bw-text-muted">
-      Listado de alumnos registrados en el sistema. Desde aquí puedes consultar, editar o eliminar registros.
-    </p>
-
-    <!-- Buscador -->
-    <form method="POST" action="/admin" class="bw-search-form">
-      <input type="text" name="busqueda" placeholder="Buscar por nombre o CURP" required>
-      <button type="submit">Buscar</button>
-    </form>
-
-    <!-- Tabla de alumnos -->
-    {% if usuarios %}
-    <div class="bw-table-wrapper">
-      <table class="bw-table">
-        <thead>
-          <tr>
-            <th>Nombre completo</th>
-            <th>CURP</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-        {% for alumno in usuarios %}
-          <tr>
-            <td>{{ alumno.nombres }} {{ alumno.apellido_paterno }} {{ alumno.apellido_materno }}</td>
-            <td>{{ alumno.curp }}</td>
-            <td>
-              <a class="bw-link" href="/admin/alumno/{{ alumno.curp }}">Ver</a> |
-              <a class="bw-link" href="/admin/alumno/{{ alumno.curp }}/editar">Editar</a> |
-              <a class="bw-link bw-link-danger" href="/admin/alumno/{{ alumno.curp }}/eliminar"
-                 onclick="return confirm('¿Seguro que deseas eliminar este alumno?');">
-                Eliminar
-              </a>
-            </td>
-          </tr>
-        {% endfor %}
-        </tbody>
-      </table>
-    </div>
-    {% else %}
-      <p>No se encontraron alumnos.</p>
-    {% endif %}
-  </section>
 </div>
 
-{% endblock %}
+
+
+      <div class="contenido">
+          <h1>Panel de Administración</h1>
+
+          <form method="POST">
+              <input type="text" name="busqueda" placeholder="Buscar por nombre o CURP" required>
+              <input type="submit" value="Buscar">
+          </form>
+
+          {% if usuarios %}
+          <table>
+              <tr>
+                  <th>Nombre completo</th>
+                  <th>CURP</th>
+                  <th>Acciones</th>
+              </tr>
+              {% for alumno in usuarios %}
+              <tr>
+                  <td>{{ alumno.nombres }} {{ alumno.apellido_paterno }} {{ alumno.apellido_materno }}</td>
+                  <td>{{ alumno.curp }}</td>
+                  <td>
+    <a class="ver" href="/admin/alumno/{{ alumno.curp }}">Ver</a> |
+    <a class="ver" href="/admin/alumno/{{ alumno.curp }}/editar">Editar</a>
+</td>
+
+              </tr>
+              {% endfor %}
+          </table>
+          {% else %}
+          <p>No se encontraron alumnos.</p>
+          {% endif %}
+      </div>
+  </div>
+</body>
+</html>
