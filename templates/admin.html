@@ -177,7 +177,11 @@
               <tr>
                   <td>{{ alumno.nombres }} {{ alumno.apellido_paterno }} {{ alumno.apellido_materno }}</td>
                   <td>{{ alumno.curp }}</td>
-                  <td><a class="ver" href="/admin/alumno/{{ alumno.curp }}">Ver</a></td>
+                  <td>
+    <a class="ver" href="/admin/alumno/{{ alumno.curp }}">Ver</a> |
+    <a class="ver" href="/admin/alumno/{{ alumno.curp }}/editar">Editar</a>
+</td>
+
               </tr>
               {% endfor %}
           </table>
