@@ -51,6 +51,13 @@ def solo_maestros(f):
             return redirect("/maestro/login")
         return f(*args, **kwargs)
     return decorador
+def solo_admin(f):
+    @wraps(f)
+    def decorador(*args, **kwargs):
+        if not session.get("admin"):
+            return redirect("/admin/login")
+        return f(*args, **kwargs)
+    return decorador
 
 # ---------- INICIO ----------
 @app.route("/")
@@ -214,6 +221,82 @@ def admin_ver_alumno(curp):
 
     return render_template("admin_ver_alumno.html", alumno=alumno)
 
+# ---------- REGISTRO DE NUEVOS USUARIOS (ADMIN) ----------
+@app.route("/admin/usuarios/nuevo", methods=["GET", "POST"])
+@solo_admin
+def admin_nuevo_usuario():
+    """
+    Permite al administrador registrar nuevos:
+    - administradores
+    - maestros
+    - alumnos
+    según el rol seleccionado en el formulario.
+    """
+    mensaje_error = ""
+    mensaje_ok = ""
+
+    if request.method == "POST":
+        rol = request.form.get("rol")
+        nombre = request.form.get("nombre", "").strip()
+        usuario_login = request.form.get("usuario_login", "").strip()
+        password = request.form.get("password", "").strip()
+
+        # Datos específicos para alumno
+        curp = request.form.get("curp", "").strip().upper()
+        email = request.form.get("email", "").strip()
+        ap_paterno = request.form.get("apellido_paterno", "").strip()
+        ap_materno = request.form.get("apellido_materno", "").strip()
+
+        if not rol:
+            mensaje_error = "Selecciona un rol."
+        elif rol in ["admin", "maestro"] and (not usuario_login or not password or not nombre):
+            mensaje_error = "Nombre, usuario y contraseña son obligatorios para admin/maestro."
+        elif rol == "alumno" and (not curp or not email or not nombre or not ap_paterno):
+            mensaje_error = "CURP, nombre, apellidos y correo son obligatorios para alumno."
+        else:
+            # Crear según rol
+            if rol == "admin":
+                if admins.find_one({"usuario": usuario_login}):
+                    mensaje_error = "Ya existe un administrador con ese usuario."
+                else:
+                    admins.insert_one({
+                        "nombre": nombre,
+                        "usuario": usuario_login,
+                        "password": password
+                    })
+                    mensaje_ok = "Administrador registrado correctamente."
+
+            elif rol == "maestro":
+                if maestros.find_one({"usuario": usuario_login}):
+                    mensaje_error = "Ya existe un maestro con ese usuario."
+                else:
+                    maestros.insert_one({
+                        "nombre": nombre,
+                        "usuario": usuario_login,
+                        "password": password
+                    })
+                    mensaje_ok = "Maestro registrado correctamente."
+
+            elif rol == "alumno":
+                if usuarios.find_one({"curp": curp}):
+                    mensaje_error = "Ya existe un alumno con esa CURP."
+                else:
+                    nuevo_alumno = {
+                        "curp": curp,
+                        "email": email,
+                        "nombres": nombre,
+                        "apellido_paterno": ap_paterno,
+                        "apellido_materno": ap_materno
+                        # aquí puedes agregar más campos si lo deseas
+                    }
+                    usuarios.insert_one(nuevo_alumno)
+                    mensaje_ok = "Alumno registrado correctamente."
+
+    return render_template(
+        "admin_nuevo_usuario.html",
+        mensaje_error=mensaje_error,
+        mensaje_ok=mensaje_ok
+    )
 
 # ---------- REPORTES PARCIALES (ADMIN) ----------
 @app.route("/admin/reportes")
