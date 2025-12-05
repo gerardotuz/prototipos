@@ -101,38 +101,51 @@ h1 {
     </style>
 </head>
 <body>
-<div class="contenedor">
+<div class="contenedor-detalle">
     <h1>Detalle del reporte parcial</h1>
 
-    <h3>Datos generales</h3>
-    <table>
-        <tr><th>Docente</th><td>{{ reporte.nombre_docente }}</td></tr>
-        <tr><th>Parcial</th><td>{{ reporte.parcial }}</td></tr>
-        <tr><th>Mes</th><td>{{ reporte.mes }}</td></tr>
-        <tr><th>Año</th><td>{{ reporte.anio }}</td></tr>
-        <tr><th>Fecha de captura</th><td>{{ reporte.fecha_captura }}</td></tr>
+    <h2 class="seccion-titulo">Datos generales</h2>
+
+    <table class="detalle-tabla">
+        <tr>
+            <th>Docente</th>
+            <td>{{ reporte.docente }}</td>
+        </tr>
+        <tr>
+            <th>Parcial</th>
+            <td>{{ reporte.parcial }}</td>
+        </tr>
+        <tr>
+            <th>Mes</th>
+            <td>{{ reporte.mes }}</td>
+        </tr>
+        <tr>
+            <th>Año</th>
+            <td>{{ reporte.anio }}</td>
+        </tr>
+        <tr>
+            <th>Fecha de captura</th>
+            <td>{{ reporte.fecha }}</td>
+        </tr>
     </table>
 
-    <h3 style="margin-top:18px;">Datos del grupo</h3>
-    <table>
+    <h2 class="seccion-titulo">Datos del grupo</h2>
+
+    <table class="detalle-tabla">
         <tr><th>Grupo</th><td>{{ reporte.grupo }}</td></tr>
         <tr><th>Asignatura</th><td>{{ reporte.asignatura }}</td></tr>
-        <tr><th>Total de alumnos (asisten y ausentes)</th><td>{{ reporte.total_alumnos }}</td></tr>
-        <tr><th># Alumnos aprobados</th><td>{{ reporte.alumnos_aprobados }} ({{ reporte.porcentaje_aprobados }}%)</td></tr>
-        <tr><th># Alumnos reprobados</th><td>{{ reporte.alumnos_reprobados }} ({{ reporte.porcentaje_reprobados }}%)</td></tr>
-        <tr><th>Promedio general del grupo</th><td>{{ reporte.promedio_general }}</td></tr>
-        <tr><th>Alumnos DUAL</th><td>{{ reporte.alumnos_dual }}</td></tr>
-        <tr><th># Alumnos sin contactar</th><td>{{ reporte.alumnos_sin_contactar }}</td></tr>
-        <tr><th>Total alumnos en LISTA (SISEEMS)</th><td>{{ reporte.total_en_lista }}</td></tr>
+        <tr><th>Total de alumnos</th><td>{{ reporte.total_alumnos }}</td></tr>
+        <tr><th># Aprobados</th><td>{{ reporte.aprobados }} ({{ reporte.porc_aprobados }}%)</td></tr>
+        <tr><th># Reprobados</th><td>{{ reporte.reprobados }} ({{ reporte.porc_reprobados }}%)</td></tr>
+        <tr><th>Promedio</th><td>{{ reporte.promedio }}</td></tr>
+        <tr><th>Dual</th><td>{{ reporte.dual }}</td></tr>
+        <tr><th>Sin contactar</th><td>{{ reporte.sin_contactar }}</td></tr>
+        <tr><th>Total en lista</th><td>{{ reporte.total_en_lista }}</td></tr>
+        <tr><th>Acciones</th><td>{{ reporte.acciones }}</td></tr>
     </table>
 
-    <h3 style="margin-top:18px;">Acciones con alumnos sin contactar</h3>
-    <p>{{ reporte.acciones_sin_contactar or "Sin información registrada." }}</p>
-
-    <div class="botones">
-        <a href="/admin/reportes">← Volver a la lista de reportes</a>
-        <a href="/admin" class="secundario">Ir al panel de alumnos</a>
-    </div>
+    <button class="btn-accion btn-volver" onclick="window.history.back()">← Volver</button>
 </div>
+
 </body>
 </html>
