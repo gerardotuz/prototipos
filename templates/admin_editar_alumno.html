@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar alumno - BUWERBUNG</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background:#f3f4f6;
+        }
+        .contenedor {
+            max-width: 900px;
+            margin: 40px auto;
+            background:#ffffff;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(15,23,42,0.18);
+            padding: 24px 32px;
+        }
+        h1 {
+            margin-top: 0;
+            color:#800020;
+        }
+        .fila {
+            display:flex;
+            flex-wrap:wrap;
+            gap:16px;
+            margin-bottom:12px;
+        }
+        .campo {
+            flex:1 1 220px;
+            min-width:220px;
+            display:flex;
+            flex-direction:column;
+        }
+        label {
+            font-size:0.85rem;
+            color:#374151;
+            margin-bottom:4px;
+        }
+        input[type="text"],
+        input[type="email"] {
+            padding:8px 10px;
+            border-radius:6px;
+            border:1px solid #d1d5db;
+            font-size:0.9rem;
+        }
+        .botones {
+            margin-top:18px;
+            display:flex;
+            flex-wrap:wrap;
+            gap:10px;
+        }
+        button,
+        a.boton {
+            padding:8px 18px;
+            border-radius:999px;
+            border:none;
+            background:#800020;
+            color:#ffffff;
+            font-weight:bold;
+            cursor:pointer;
+            font-size:0.85rem;
+            text-decoration:none;
+            display:inline-block;
+        }
+        button:hover,
+        a.boton:hover {
+            background:#5a0015;
+        }
+        a.secundario {
+            background:#111827;
+            border:1px solid #4b5563;
+        }
+        a.secundario:hover {
+            background:#020617;
+        }
+    </style>
+</head>
+<body>
+<div class="contenedor">
+    <h1>Editar datos del alumno</h1>
+
+    <form action="/admin/alumno/{{ alumno.curp }}/editar" method="POST">
+        <div class="fila">
+            <div class="campo">
+                <label>CURP (no editable)</label>
+                <input type="text" value="{{ alumno.curp }}" disabled>
+            </div>
+            <div class="campo">
+                <label for="grupo">Grupo</label>
+                <input type="text" id="grupo" name="grupo" value="{{ alumno.grupo or '' }}" placeholder="Ej. 3BPV">
+            </div>
+        </div>
+
+        <div class="fila">
+            <div class="campo">
+                <label for="nombres">Nombre(s)</label>
+                <input type="text" id="nombres" name="nombres" value="{{ alumno.nombres or '' }}">
+            </div>
+            <div class="campo">
+                <label for="apellido_paterno">Apellido paterno</label>
+                <input type="text" id="apellido_paterno" name="apellido_paterno" value="{{ alumno.apellido_paterno or '' }}">
+            </div>
+            <div class="campo">
+                <label for="apellido_materno">Apellido materno</label>
+                <input type="text" id="apellido_materno" name="apellido_materno" value="{{ alumno.apellido_materno or '' }}">
+            </div>
+        </div>
+
+        <div class="fila">
+            <div class="campo">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" name="email" value="{{ alumno.email or '' }}">
+            </div>
+            <div class="campo">
+                <label for="telefono">Teléfono</label>
+                <input type="text" id="telefono" name="telefono" value="{{ alumno.telefono or '' }}">
+            </div>
+        </div>
+
+        <div class="botones">
+            <button type="submit">Guardar cambios</button>
+            <a href="/admin/alumno/{{ alumno.curp }}" class="boton secundario">Cancelar</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>
