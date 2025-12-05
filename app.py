@@ -219,7 +219,7 @@ def admin_ver_alumno(curp):
             texto_link="Volver al panel"
         )
 
-    return render_template("admin_ver_alumno.html", alumno=alumno)
+    return render_template("admin_ver_alumnos.html", alumno=alumno)
 
 # ---------- REGISTRO DE NUEVOS USUARIOS (ADMIN) ----------
 @app.route("/admin/usuarios/nuevo", methods=["GET", "POST"])
