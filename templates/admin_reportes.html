@@ -89,29 +89,49 @@
             color: #800020;
             margin-top: 0;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-        th, td {
-            border: 1px solid #e5e7eb;
-            padding: 8px 10px;
-            text-align: left;
-            font-size: 0.9rem;
-        }
-        th {
-            background-color: #d1c47a;
-            color: #111827;
-        }
-        tr:hover {
-            background-color: #f1f5f9;
-        }
-        a.ver {
-            color: #800020;
-            font-weight: bold;
-            text-decoration: none;
-        }
+       table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background:#020617;              /* fondo general de la tabla */
+    border-radius:12px;
+    overflow:hidden;
+}
+
+th, td {
+    border-bottom: 1px solid #1f2937;
+    padding: 10px;
+    text-align: left;
+    font-size: 14px;
+}
+
+/* Encabezados dorados y texto oscuro */
+th {
+    background-color: #d1c47a;
+    color: #111827;
+    text-transform: uppercase;
+}
+
+/* Filas alternadas en tonos oscuros pero con texto CLARO */
+tbody tr:nth-child(odd) {
+    background:#0b1120;
+}
+tbody tr:nth-child(even) {
+    background:#020617;
+}
+
+/* Texto de las celdas en color claro */
+tbody td {
+    color:#e5e7eb;
+}
+
+/* Hover suave */
+tbody tr:hover {
+    background:#111827;
+}
+
+/* Enlace "Ver*
+
         .subtitulo {
             font-size: 0.9rem;
             color: #4b5563;
